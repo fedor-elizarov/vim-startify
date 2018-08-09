@@ -22,7 +22,8 @@ endfunction
 
 " Function: #quote {{{1
 function! startify#fortune#quote() abort
-  return s:quotes[s:get_random_offset(len(s:quotes))]
+  return  [system("fortune  | sed -e 's/[ \t]*//'")]
+  "s:quotes[s:get_random_offset(len(s:quotes))]
 endfunction
 
 " Function: #boxed {{{1
@@ -49,8 +50,9 @@ function! startify#fortune#cowsay(...) abort
   else
     let quote = startify#fortune#quote()
   endif
-  let boxed_quote = startify#fortune#boxed(quote)
-  let boxed_quote += s:cow
+  let boxed_quote=s:barts
+  let boxed_quote+=startify#fortune#boxed(quote)
+" s:barts
   return map(boxed_quote, '"   ". v:val')
 endfunction
 
@@ -58,6 +60,35 @@ endfunction
 function! startify#fortune#predefined_quotes() abort
   return s:predefined_quotes
 endfunction
+
+let s:barts = [
+\'                /\/\,\,\ ,',
+\'                /        ` ..\,',
+\'               /                /|_',
+\'              /                   /',
+\'             /                   /',
+\'            /                   ;',
+\'            ;-""-.  ____       ,',
+\'           /      ).    `.      ',
+\'          (    o |        )   ;',
+\'           ),". "\    o   ;  :',
+\'           ;\___  `._____/ ,-:',
+\'          ;                 @ ',
+\'         /                `;-',
+\'      ,. `-.______________,|',
+\' ,(`._||         \__\__\__)|',
+\',`.`-   \       ...        |',
+\'',
+\' `._  ) :          )______,;\_',
+\'    \    \_   _,--/       ,   `.',
+\'     \     `--\   :      /      `.',
+\'      \        \  ;     |         \',
+\'       `-._____ ;|      |       _,',
+\'   -hrr-       \//      `-.----. \',
+\'                                   ',
+\ ]
+
+
 
 " Variables {{{1
 let s:cow = [
@@ -78,7 +109,24 @@ let s:char_top_right    = ['*', '╮'][s:unicode]
 let s:char_bottom_right = ['*', '╯'][s:unicode]
 let s:char_bottom_left  = ['*', '╰'][s:unicode]
 
-let s:predefined_quotes = [
+let s:predefined_quotes = [ 
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ [system("fortune  | sed -e 's/[ \t]*//'")],
+            \ ]
+let s:_predefined_quotes = [
       \ ["Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", '', '- Brian Kernighan'],
       \ ["If you don't finish then you're just busy, not productive."],
       \ ['Adapting old programs to fit new machines usually means adapting new machines to behave like old ones.', '', '- Alan Perlis'],
